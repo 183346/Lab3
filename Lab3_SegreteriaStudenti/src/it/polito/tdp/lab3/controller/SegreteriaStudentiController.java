@@ -128,7 +128,7 @@ public class SegreteriaStudentiController {
         	if(!controllo){this.txtResult.appendText("formato matricola errato");return;}
         	int matricola=Integer.parseInt(this.txtMatricola.getText());
     		result=model.cercaCorsiPerStudente(matricola);
-    		if(result.compareTo("")==0){this.txtResult.appendText("nessun risultato");return;}
+    		if(result.compareTo("")==0){this.txtResult.appendText("matricola inesistente ! ");return;}
         	this.txtResult.appendText(result);
     	}
     	
@@ -137,6 +137,7 @@ public class SegreteriaStudentiController {
     @FXML
     void doIscrivi(ActionEvent event) {
     	String result="";
+    	this.txtResult.clear();
     	if(this.txtMatricola.getText().compareTo("")!=0 && this.comboCorso.getValue()!=null && this.comboCorso.getValue().getCodins().compareTo("X")!=0){
     	//controllo matricola
     		boolean controllo=model.controlloInput(this.txtMatricola.getText());
@@ -149,7 +150,7 @@ public class SegreteriaStudentiController {
         	if(nomeCognome[0]==null){this.txtResult.appendText("nessun risultato:matricola inesistente");return;}
         	Corso corso=this.comboCorso.getValue();
         	boolean verifica=model.controllaMC1(matricola,corso.getCodins());
-        	if(verifica){this.txtResult.appendText("Studente già inscritto a questo corso");return;}
+        	if(verifica){this.txtResult.appendText("Studente già iscritto a questo corso");return;}
         	result=model.inscrivi(matricola,corso.getCodins());
         	if(result.compareTo("")==0){this.txtResult.appendText("errore inserimento dati");return;}
         	this.txtResult.appendText(result);
